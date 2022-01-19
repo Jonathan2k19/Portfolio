@@ -1,0 +1,213 @@
+<!-- 
+    AWESOME TUTORIALS:
+        - Smooth scroll behavior for sections: https://www.youtube.com/watch?v=y9nlfqT4s9s
+        - Responsive navbar: https://www.youtube.com/watch?v=gXkqy0b4M5g
+        - Responsive multi page website: https://www.youtube.com/watch?v=oYRda7UtuhA
+        - send mail: https://www.youtube.com/watch?v=1DcySa35fXw
+    -->
+
+<!-- 
+    TODO:
+        - use different gradient color in header
+        - fix bug from navbar (automatically slides first time screen size is to small)
+            -> I believe there was a fix in comment section of navbar video
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'myportfolio/css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Some Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Poppins:wght@100;200;500;600;700&display=swap" rel="stylesheet">
+    <title>My Portfolio</title>
+</head>
+
+
+
+<html>
+
+<body>
+
+
+
+    <!-- NAVBAR -->
+
+
+
+    <section class="header">
+        <a id="home"></a>
+        <nav class="navbar">
+            <div class="logo">
+                <h5>J.B.</h5>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <!-- mobile menu symbol-->
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+
+        <div class="introduction">
+            <h1 id="greeting">Hello, I'm</h1>
+            <h1 id="name">Jonathan</h1>
+            <h2>Computer science student.</h2>
+        </div>
+    </section>
+
+
+
+    <!-- ABOUT ME -->
+
+
+
+    <section class="section" id="about">
+        <h1>About me</h1>
+        <p>
+            This is me. <br> Hobbies <br> Resume <br>
+            <img src="https://img.icons8.com/ios/50/000000/open-resume.png" />
+
+        </p>
+    </section>
+
+
+
+    <!-- PROJECTS -->
+
+
+
+    <section class="section" id="projects">
+        <h1>Personal projects</h1>
+        <!-- make 3 cards -->
+        <div class="row">
+            {% for key, value in repo_dict.items %}
+            <div class="col">
+                <h2>
+                    <a href="https://www.github.com/Jonathan2k19/{{key}}">{{key}}</a>
+                </h2>
+                <p>{{value}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <p>To see more of my work, feel free to visit my
+            <a id="github" href="https://www.github.com/Jonathan2k19/">Github</a>
+        </p>
+    </section>
+
+
+
+    <!-- CONTACT ME: https://github.com/sefyudem/Contact-Us-Form  -->
+
+
+
+    <section class="section" id="contact">
+        <form action="" name="contactForm" method="POST" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="contact-box">
+                <div class="left"></div>
+                <div class="right">
+                    <h2>Contact me</h2>
+                    <input type="text" class="field" placeholder="Your Name" name="name">
+                    <input type="text" class="field" placeholder="Your Email" name="email">
+                    <input type="text" class="field" placeholder="Phone" name="phone">
+                    <textarea placeholder="Message" class="field" name="message"></textarea>
+                    <button class="btn">Send</button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+
+
+    <section class="footer">
+        <hr>
+        <p>&copy; 2021 Jonathan</p>
+        <a href="https://icons8.com/icon/45586/download-resume">Icons made by Icons8</a>
+    </section>
+
+
+
+    <!-- JS -->
+
+
+
+    <script>
+        /**
+         * Sticky navbar
+         */
+        window.onscroll = function() {
+            stickyNavbar()
+        };
+        var navbar = document.querySelector('.navbar');
+        var sticky = navbar.offsetTop;
+
+        function stickyNavbar() {
+            if (window.pageYOffset > sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+
+        /**
+         * Validate contact form
+         */
+        function validateForm() {
+            let name = document.forms['contactForm']['name'].value;
+            let email = document.forms['contactForm']['email'].value;
+            let phone = document.forms['contactForm']['phone'].value;
+            let message = document.forms['contactForm']['message'].value;
+
+            if (name == '' || hasNumber(name)) {
+                alert('Name must be filled out and must only contain letters');
+                return false;
+            } else if (email == '' && phone == '') {
+                alert('Email or phone must be filled out');
+                return false;
+            } else if (!(email.includes('@'))) {
+                alert('Email does not seem to be valid');
+                return false;
+            } else if (isNaN(phone)) {
+                alert('Phone number seems to contain letters');
+                return false;
+            } else if (message == '') {
+                alert('Message must be filled out');
+                return false;
+            } else {
+                // confirm or cancel
+                return confirm('Do you really want to sent the message?')
+            }
+        }
+
+        function hasNumber(myString) {
+            return /\d/.test(myString);
+        }
+    </script>
+
+
+
+    <!-- JQuery and JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'myportfolio/js/app.js' %}"></script>
+</body>
+
+</html>

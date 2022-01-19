@@ -1,0 +1,472 @@
+/* *****************************************************
+*
+HEADER, GENERAL STUFF
+*
+*******************************************************/
+
+body {
+    font-family: "Poppins", sans-serif;
+    /*background-color: rgb(39, 39, 39);  /* dark mode */
+    background-color: white;
+    /* light mode */
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.header {
+    /* portrait as background image */
+    background-image: linear-gradient(rgba(73, 75, 78, 0.6), rgba(73, 75, 78, 0.6)), url("/static/myportfolio/images/avatar.png");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+}
+
+
+/* *****************************************************
+*
+NAVIGATION BAR (normal and mobile)
+*
+*******************************************************/
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+}
+
+.logo {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 20px;
+    font-family: "Allura", cursive;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.nav-links li {
+    list-style: none;
+    white-space: nowrap;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: 300;
+    font-size: 18px;
+    margin: 1vw;
+}
+
+.nav-links li::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #25a888;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+
+.nav-links li:hover::after {
+    width: 100%;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    background-color: white;
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    /* mobile menu */
+    body {
+        overflow-x: hidden;
+    }
+    .nav-links {
+        z-index: 1;
+        /* on top of everything else */
+        position: absolute;
+        right: 0px;
+        height: 80vh;
+        top: 7vh;
+        background-color: #383E42;
+        opacity: 0.95;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 35%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    .nav-links li {
+        opacity: 0;
+    }
+    .burger {
+        display: block;
+    }
+}
+
+.nav-active {
+    transform: translateX(0%);
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px0);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+
+/* STICKY NAVBAR */
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #383E42;
+    z-index: 1;
+}
+
+
+/* *****************************************************
+*
+INTRODUCTION 
+*
+*******************************************************/
+
+.introduction {
+    color: white;
+    position: absolute;
+    width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.introduction #greeting {
+    font-weight: 200;
+    font-size: 60px;
+    letter-spacing: 3px;
+}
+
+.introduction #name {
+    font-weight: 600;
+    font-size: 70px;
+    letter-spacing: 5px;
+    white-space: nowrap;
+}
+
+.introduction h2 {
+    font-weight: 200;
+    font-size: 30px;
+}
+
+
+/* mobile -> never smaller than 12px*/
+
+@media screen and (max-width: 768px) {
+    .introduction #greeting {
+        font-weight: 200;
+        font-size: calc(12px + 4vw);
+        letter-spacing: 2px;
+    }
+    .introduction #name {
+        font-weight: 600;
+        font-size: calc(12px + 5.5vw);
+        letter-spacing: 3px;
+        white-space: nowrap;
+    }
+    .introduction h2 {
+        font-weight: 200;
+        font-size: calc(12px + 2.5vw);
+    }
+}
+
+
+/* *****************************************************
+*
+ALL SECTIONS (about, projects, contact) 
+*
+*******************************************************/
+
+.section {
+    color: black;
+    /* light mode */
+    /*color: white; /* dark mode */
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    height: 100%;
+}
+
+.section h1 {
+    font-size: 60px;
+    font-weight: 300;
+    padding-bottom: 4vh;
+}
+
+.section p {
+    font-weight: 200;
+    font-size: 25px;
+}
+
+
+/* for mobile screens */
+
+@media screen and (max-width: 768px) {
+    .section h1 {
+        font-size: calc(12px + 5vw);
+        letter-spacing: 2px;
+    }
+    .section p {
+        font-size: calc(12px + 1.5vw);
+    }
+}
+
+
+/* *****************************************************
+*
+ABOUT ME 
+*
+*******************************************************/
+
+
+/* *****************************************************
+*
+PROJECTS
+*
+*******************************************************/
+
+.row {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.col {
+    flex-basis: 31%;
+    background: #b5ccd1;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.col:hover {
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.3);
+}
+
+.col h2 {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.col a {
+    text-decoration: none;
+    color: black;
+}
+
+.col p {
+    font-weight: 300;
+    font-size: 18px;
+}
+
+
+/* .col a::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #25a888; 
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+
+.col a:hover::after{
+    width: 100%;
+} */
+
+#github {
+    text-decoration: underline;
+    color: black;
+    text-decoration-color: #25a888;
+}
+
+
+/* for mobile screens */
+
+@media screen and (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+}
+
+
+/* *****************************************************
+*
+CONTACT 
+*
+*******************************************************/
+
+.contact-box {
+    max-width: 100%;
+    display: grid;
+    border-radius: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #b5ccd1;
+    /* #fff */
+    transition: 0.5s;
+}
+
+.contact-box:hover {
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.3);
+}
+
+.left {
+    background: url("/static/myportfolio/images/contact.jpg") no-repeat center;
+    background-size: cover;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.right {
+    padding: 25px 40px;
+}
+
+h2 {
+    position: relative;
+    padding: 0 0 10px;
+    margin-bottom: 10px;
+}
+
+h2:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 4px;
+    width: 50px;
+    border-radius: 2px;
+    background-color: #25a888;
+}
+
+.field {
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 3px;
+    outline: none;
+    background-color: rgba(230, 230, 230, 0.835);
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 22px;
+    transition: .3s;
+}
+
+.field:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    min-height: 150px;
+}
+
+.btn {
+    width: 40%;
+    padding: 0.5rem 1rem;
+    background-color: #25a888;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 1.1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.field:focus {
+    background-color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .contact-box {
+        grid-template-columns: 1fr;
+    }
+    .left {
+        height: 200px;
+    }
+}
+
+
+/* *****************************************************
+*
+FOOTER 
+*
+*******************************************************/
+
+.footer {
+    width: 100%;
+    text-align: center;
+    opacity: 0.5;
+    background-color: lightgray;
+}
+
+.footer p {
+    padding: 12px 0;
+    font-weight: 300;
+}
+
+.footer a {
+    text-decoration: none;
+    font-weight: 200;
+    color: black;
+}
